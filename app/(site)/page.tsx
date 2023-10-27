@@ -1,4 +1,5 @@
 import GradientText from "@/components/General/GradientText";
+import Link from "next/link";
 
 const Home: React.FC = () => {
   return (
@@ -14,9 +15,11 @@ const Home: React.FC = () => {
           of your choosing with just a few clicks
         </h2>
         <div className="text-center">
-          <button className="bg-gradient-to-br gradient-primary mx-auto lg:mx-0 text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg shadow-pink-800 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-            Subscribe
-          </button>
+          <Link href="/convert">
+            <button className="bg-gradient-to-br gradient-primary mx-auto lg:mx-0 text-gray-800 font-bold rounded-full py-4 px-8 shadow-lg shadow-pink-800 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              Get Started
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -83,19 +86,6 @@ const Home: React.FC = () => {
             porttitor.
           </p>
         </div>
-      </div>
-
-
-      <h2 className="pt-36 mb-1 text-2xl font-semibold tracking-tighter text-center lg:text-7xl md:text-6xl">
-        <GradientText titleText="Convert Files" />
-      </h2>
-      <p className="mx-auto text-xl text-center text-gray-300 font-normal leading-relaxed fs521 lg:w-2/3">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi at dolorum assumenda
-        ipsa quod consectetur dicta est alias
-      </p>
-
-      <div className="container my-10 py-20 border border-dashed flex flex-col items-center justify-center mx-auto">
-        Drop Zone
       </div>
     </section>
   );

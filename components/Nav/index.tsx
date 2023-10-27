@@ -1,6 +1,7 @@
 "use client";
 
 import GradientText from "../General/GradientText";
+import Link from "next/link";
 import { useState } from "react";
 
 const Navbar: React.FC = () => {
@@ -10,9 +11,11 @@ const Navbar: React.FC = () => {
         <header className="fixed top-0 w-full clearNav z-50">
             <div className="max-w-5xl mx-auto flex flex-wrap p-5 flex-col md:flex-row">
                 <div className="flex flex-row items-center justify-between p-3 md:p-1">
-                    <div className="flex text-3xl text-white font-medium mb-4 md:mb-0">
-                        <GradientText titleText="FH" />
-                    </div>
+                    <Link href="/">
+                        <div className="flex text-3xl text-white font-medium mb-4 md:mb-0">
+                            <GradientText titleText="FH" />
+                        </div>
+                    </Link>
 
                     <button
                         className="text-white pb-4 cursor-pointer leading-none px-3 py-1 md:hidden outline-none focus:outline-none content-end ml-auto"
@@ -41,8 +44,13 @@ const Navbar: React.FC = () => {
 
                 <div className={"md:flex flex-grow items-center" + (navbarOpen ? " flex" : " hidden")}>
                     <div className="md:ml-auto md:mr-auto font-4 pt-1 md:pl-14 pl-1 flex flex-wrap items-center md:text-base text-1xl md:justify-center justify-items-start">
+                        <Link href="/convert">
+                            <div className="cursor-pointer text-gray-300 hover:text-white font-semibold tr04">
+                                Convert
+                            </div>
+                        </Link>
 
-                        <div className="mr-12 md:ml-11 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04">
+                        <div className="mr-5 md:ml-5 ml-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04">
                             Features
                         </div>
                         <div className="mr-5 cursor-pointer text-gray-300 hover:text-white font-semibold tr04">
