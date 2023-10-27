@@ -16,9 +16,7 @@ const config: Config = {
       },
       colors: {
         primary: {
-          DEFAULT: "#fc5a03",
-          "red": "#fc032d",
-          "gradient": "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+          DEFAULT: "#7851a9",
         },
       },
     },

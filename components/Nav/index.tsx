@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
                 <div className={"md:flex flex-grow items-center" + (navbarOpen ? " flex" : " hidden")}>
                     <div className="md:ml-auto md:mr-auto font-4 pt-1 md:pl-14 pl-1 flex flex-wrap items-center md:text-base text-1xl md:justify-center justify-items-start">
                         <Link href="/convert">
-                            <div className="cursor-pointer text-gray-300 hover:text-white font-semibold tr04">
+                            <div className="mr-5 lg:mr-0 md:mr-0 cursor-pointer text-gray-300 hover:text-white font-semibold tr04">
                                 Convert
                             </div>
                         </Link>

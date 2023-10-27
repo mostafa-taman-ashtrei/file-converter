@@ -13,7 +13,7 @@
     "sort-imports": "warn",
     "array-bracket-newline": "warn",
     "no-alert": "error",
-    "no-console": "error",
+    "no-console": "warn",
     "no-duplicate-imports": "error",
     "no-unused-vars": "error",
     "jsx-quotes": [

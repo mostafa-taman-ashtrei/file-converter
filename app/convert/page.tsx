@@ -1,3 +1,4 @@
+import FileUpload from "./components/FileUpload";
 import GradientText from "@/components/General/GradientText";
 
 const Convert: React.FC = () => {
@@ -12,9 +13,8 @@ const Convert: React.FC = () => {
                 ipsa quod consectetur dicta est alias
             </p>
 
-            <div className="container my-10 py-20 border border-dashed flex flex-col items-center justify-center mx-auto">
-                Drop Zone
-            </div>
+            <FileUpload />
+
         </div>
     );
 };
