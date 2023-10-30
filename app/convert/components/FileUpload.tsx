@@ -65,9 +65,12 @@ const FileUpload: React.FC = () => {
                 )}
             </Dropzone>
 
-            <div className="mx-6 py-2">
-                <FileList FileList={fileList} />
 
+            <div className="mx-6 py-2">
+                <FileList
+                    FileList={fileList}
+                    setFileList={setFileList}
+                />
             </div>
         </>
     );

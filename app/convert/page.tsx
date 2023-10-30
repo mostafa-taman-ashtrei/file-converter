@@ -4,7 +4,7 @@ import GradientText from "@/components/General/GradientText";
 const Convert: React.FC = () => {
     return (
         <div>
-            <h2 className="pt-36 mb-1 text-2xl font-semibold tracking-tighter text-center lg:text-7xl md:text-6xl">
+            <h2 className="pt-36 mb-1 text-2xl font-semibold text-center lg:text-7xl md:text-6xl">
                 <GradientText titleText="Convert Files" />
             </h2>
 
@@ -14,7 +14,6 @@ const Convert: React.FC = () => {
             </p>
 
             <FileUpload />
-
         </div>
     );
 };

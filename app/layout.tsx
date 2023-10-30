@@ -1,8 +1,10 @@
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import Navbar from "@/components/Nav";
+import { Theme } from "@radix-ui/themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +22,10 @@ const RootLayout: React.FC<props> = ({ children }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <Theme appearance="dark">
+          <Navbar />
+          {children}
+        </Theme>
       </body>
     </html>
   );

@@ -12,8 +12,8 @@ const acceptedFiles = {
         ".raw",
         ".tga",
     ],
-    "audio/*": [],
-    "video/*": [],
+    "audio/*": [] as string[],
+    "video/*": [] as string[],
 };
 
 export default acceptedFiles;
