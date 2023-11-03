@@ -11,6 +11,7 @@ import FileIcon from "./FileUtils";
 import { FileListType } from "@/types/file";
 import { MdClose } from "react-icons/md";
 import { SiConvertio } from "react-icons/si";
+import { Skeleton } from "@/components/General/Skeleton";
 import convert from "@/lib/converter";
 import fileExtensions from "@/constants/fileExtension";
 import toast from "react-hot-toast";
@@ -126,7 +127,17 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
 
     if (FileList.length === 0) return null;
 
-    if (!ffmpegLoaded) return <div className="mx-6 bg-primary rounded-full h-2.5 mb-4 animate-pulse" />;
+
+    if (!ffmpegLoaded) return <>
+        {
+            FileList.map(() => <Skeleton
+                key={uuidv4()}
+                className="bg-primary py-2 my-2 mb space-y-2 lg:py-0 relative cursor-pointer rounded-full  h-fit lg:h-10 px-4 lg:px-10 flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center justify-between text-gray-300" />
+            )
+        }
+    </>;
+
+
 
     return (
         <div className="space-y-3">
