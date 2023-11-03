@@ -43,20 +43,20 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
         });
     };
 
-    const download = (action: FileListType) => {
+    const download = (file: FileListType) => {
         const a = document.createElement("a");
 
-        if (typeof action.output === "undefined" || typeof action.url === "undefined") return;
+        if (typeof file.output === "undefined" || typeof file.url === "undefined") return;
 
         a.style.display = "none";
-        a.href = action.url;
-        a.download = action.output;
+        a.href = file.url;
+        a.download = file.output;
 
         document.body.appendChild(a);
         a.click();
 
         // Clean up after download
-        URL.revokeObjectURL(action.url);
+        URL.revokeObjectURL(file.url);
         document.body.removeChild(a);
     };
 
