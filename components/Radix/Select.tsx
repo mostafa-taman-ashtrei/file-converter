@@ -3,6 +3,8 @@
 import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
+import { FaRegCheckCircle } from "react-icons/fa";
+import { MdUnfoldMore } from "react-icons/md";
 import { merge } from "@/utils/tailwind";
 
 const Select = SelectPrimitive.Root;
@@ -25,14 +27,7 @@ const SelectTrigger = React.forwardRef<
     >
         {children}
         <SelectPrimitive.Icon asChild>
-            <svg
-                className="w-3.5 h-3.5"
-                viewBox="0 0 1010 1010"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path d="M694.736 407.584 512 590.32 329.264 407.584l-52.208 52.208L460.32 642l-0.528 0.528 52.144 50.784 52.272-50.784-0.576-0.576 183.312-182.16L694.736 407.584zM512 16C238.064 16 16 238.064 16 512s222.064 496 496 496 496-222.064 496-496S785.936 16 512 16zM512 955.792C266.896 955.792 68.208 757.104 68.208 512 68.208 266.912 266.896 68.208 512 68.208S955.792 266.912 955.792 512C955.792 757.104 757.104 955.792 512 955.792z" />
-            </svg>
+            <MdUnfoldMore />
         </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger >
 ));
@@ -97,9 +92,7 @@ const SelectItem = React.forwardRef<
     >
         <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
             <SelectPrimitive.ItemIndicator>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0 0 24 24">
-                    <path fill="none" stroke="#7851a9" stroke-miterlimit="10" stroke-width="2" d="M21 6L9 18 4 13" />
-                </svg>
+                <FaRegCheckCircle className="text-primary" />
             </SelectPrimitive.ItemIndicator>
         </span>
 

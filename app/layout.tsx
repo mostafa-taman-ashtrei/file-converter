@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import Navbar from "@/components/Nav";
 import { Theme } from "@radix-ui/themes";
+import ToasterProvider from "@/providers/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ const RootLayout: React.FC<props> = ({ children }) => {
     <html lang="en">
       <body className={inter.className}>
         <Theme appearance="dark">
+          <ToasterProvider />
           <Navbar />
           {children}
         </Theme>

@@ -85,7 +85,7 @@ const FileUpload: React.FC = () => {
                     ffmpegRef={ffmpegRef}
                     ffmpegLoaded={ffmpegLoaded}
                 />
-            </div>
+            </div >
         </>
     );
 };

@@ -10,8 +10,10 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import FileIcon from "./FileUtils";
 import { FileListType } from "@/types/file";
 import { MdClose } from "react-icons/md";
+import { SiConvertio } from "react-icons/si";
 import convert from "@/lib/converter";
 import fileExtensions from "@/constants/fileExtension";
+import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
 
 interface props {
@@ -76,7 +78,19 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
 
     const handleConvertingFiles = async () => {
         setIsConverting(true);
-        let tmpFiles = FileList.map((prev) => ({ ...prev, isConverting: true }));
+
+        let tmpErorrs: { fileName: string, message: string }[] = [];
+
+        let tmpFiles = FileList.map((prev) => {
+            if (prev.to === null) {
+                tmpErorrs.push({ fileName: prev.fileName, message: `${displayFileName(prev.fileName)} has no convert to option` });
+                toast.error(`${displayFileName(prev.fileName)} has no convert to option`, { position: "top-left" });
+                return prev;
+            }
+            return { ...prev, isConverting: true };
+        });
+
+        if (tmpErorrs.length > 0) return setIsConverting(false);
 
         setFileList(tmpFiles);
 
@@ -96,13 +110,18 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
                         : prev
                 );
 
+                toast.success(`Successfully converted ${displayFileName(file.fileName)}, download it now!`);
                 setFileList(tmpFiles);
             } catch (error) {
-                throw new Error(`Failed to convert file ${file.fileName} due to ${error}`,);
+                file.isError = true;
+                throw new Error(`Failed to convert file ${displayFileName(file.fileName)} due to ${error}`,);
             } finally {
-                setIsConverting(false);
+                file.isConverted = true;
             }
         }
+
+        setIsConverting(false);
+        setConvertValue({ audio: "", image: "", video: "" });
     };
 
     if (FileList.length === 0) return null;
@@ -114,7 +133,7 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
             {
                 FileList.map((file) => <div
                     key={uuidv4()}
-                    className="py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl  h-fit lg:h-16 px-4 lg:px-10 flex flex-wrap lg:flex-nowrap items-center justify-between text-gray-300"
+                    className="py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl  h-fit lg:h-16 px-4 lg:px-10 flex flex-wrap md:flex-nowrap lg:flex-nowrap items-center justify-between text-gray-300"
                 >
                     <div className="flex gap-4 items-center">
                         <span className="text-2xl text-primary">
@@ -136,7 +155,7 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
                             onValueChange={(value) => handleSelectChange(value, file)}
                             value={getFileExtensionValue(file.fileType)}
                         >
-                            <SelectTrigger className="w-32 outline-none focus:outline-none focus:ring-0 text-center text-gray-600 bg-gray-50 text-md font-medium">
+                            <SelectTrigger className="w-32 outline-none text-center text-white bg-gray-700 text-md font-medium">
                                 <SelectValue placeholder="Convert To" />
                             </SelectTrigger>
                             <SelectContent className="h-fit">
@@ -162,15 +181,18 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
                             <Button
                                 onClick={() => download(file)}
                                 variant="outline"
+                                disabled={file.isConverting}
                             >
-                                <BiSolidCloudDownload />
-                                <span className="mx-2">Download</span>
+                                <div className="flex flex-row justify-center items-center gap-2">
+                                    <BiSolidCloudDownload />
+                                    <span>Download</span>
+                                </div>
                             </Button>
                         }
 
                         <span
                             onClick={() => handleDeleteFile(file)}
-                            className="cursor-pointer hover:bg-gray-50 rounded-full h-10 w-10 flex items-center justify-center text-2xl text-gray-400"
+                            className="cursor-pointer hover:bg-gray-800 rounded-full h-10 w-10 flex items-center justify-center text-2xl text-gray-400"
                         >
                             <MdClose />
                         </span>
@@ -190,9 +212,11 @@ const FileList: React.FC<props> = ({ FileList, setFileList, ffmpegRef, ffmpegLoa
                     {
                         isConverting
                             ? <span className="text-gray-400 animate-bounce">Converting {FileList.length} files ...</span>
-                            : <span>Convert All</span>
+                            : <div className="flex flex-row justify-center items-center gap-2">
+                                <SiConvertio />
+                                <span>Convert All</span>
+                            </div>
                     }
-
                 </Button>
             </div>
         </div>
