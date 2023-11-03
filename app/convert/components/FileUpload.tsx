@@ -1,17 +1,30 @@
 "use client";
 
 import Dropzone, { FileRejection } from "react-dropzone";
+import { useEffect, useRef, useState } from "react";
 
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { FiUploadCloud } from "react-icons/fi";
 import FileList from "./FileList";
 import { FileListType } from "@/types/file";
 import acceptedFiles from "@/constants/acceptedFiles";
-import { useState } from "react";
+import loadFfmpeg from "@/utils/ffmpeg";
 
 const FileUpload: React.FC = () => {
     const [dropEnter, setDropEnter] = useState(false);
+    const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
     const [fileList, setFileList] = useState<FileListType[]>([]);
 
+    const ffmpegRef = useRef(new FFmpeg());
+
+    const load = async () => {
+        const ffmpeg_response: FFmpeg = await loadFfmpeg();
+
+        ffmpegRef.current = ffmpeg_response;
+        setFfmpegLoaded(true);
+    };
+
+    useEffect(() => { load(); }, []);
 
     const handleDragRejected = (fileRejections: FileRejection[]) => {
         throw new Error("Failed To Upload File(s)! Only audio, video and images are allowed!", { cause: fileRejections });
@@ -65,11 +78,12 @@ const FileUpload: React.FC = () => {
                 )}
             </Dropzone>
 
-
             <div className="mx-6 py-2">
                 <FileList
                     FileList={fileList}
                     setFileList={setFileList}
+                    ffmpegRef={ffmpegRef}
+                    ffmpegLoaded={ffmpegLoaded}
                 />
             </div>
         </>
