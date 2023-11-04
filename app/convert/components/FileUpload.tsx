@@ -7,8 +7,8 @@ import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { FiUploadCloud } from "react-icons/fi";
 import FileList from "./FileList";
 import { FileListType } from "@/types/file";
-import acceptedFiles from "@/constants/acceptedFiles";
 import loadFfmpeg from "@/utils/ffmpeg";
+import toast from "react-hot-toast";
 
 const FileUpload: React.FC = () => {
     const [dropEnter, setDropEnter] = useState(false);
@@ -38,6 +38,11 @@ const FileUpload: React.FC = () => {
         const tmp: FileListType[] = [];
 
         acceptedFiles.forEach((file) => {
+            const fileType = file.type.split("/")[0];
+            const isAccepted = fileType === "video" || fileType === "audio" || fileType === "image";
+
+            if (!isAccepted) return toast.error(`We currently do not accept ${fileType} files.`);
+
             tmp.push({
                 fileName: file.name,
                 fileSize: file.size,
@@ -62,7 +67,6 @@ const FileUpload: React.FC = () => {
                 onDragEnter={handleDragEnter}
                 onDragLeave={handleDragLeave}
                 onDropAccepted={handleDragLeave}
-                accept={acceptedFiles}
             >
                 {({ getRootProps, getInputProps }) => (
                     <div
