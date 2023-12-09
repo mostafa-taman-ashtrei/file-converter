@@ -1,13 +1,10 @@
 const fileExtensions = {
     image: [
         "jpg",
-        "jpeg",
         "png",
         "gif",
         "bmp",
         "webp",
-        "ico",
-        "tif",
         "tiff",
         "tga",
     ],
